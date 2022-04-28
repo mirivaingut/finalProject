@@ -2,7 +2,7 @@
 
 
 Camera::Camera() {
-	this->id = idCameras++;
+	this->id = ++idCameras;
 	this->isActive = true;
 	this->messages = (BaseMessage**)malloc(sizeof(BaseMessage*));
 	this->indexMessages = 0;
@@ -77,23 +77,30 @@ void Camera::run() {
 	while (this->isActive) {
 		generate();
 		if (isActive) {
-			messages[0];
 			sendToBuffer();
 		}
 	}
 }
 
 void Camera::stop() {
-	std::cout <<"cameraId: "<<this->id<< "  isActive = false\n";
+	std::cout <<"cameraId: "<<this->id<< "isActive = false\n";
 	isActive = false;
 }
 
 void Camera::send() {
 	//send to server:
 	//buf->getBuffer();
-	std::cout << "camera number: " << (this->id) << "send . . . ";
+	std::cout << "camera number: " << (this->id) << "  send . . . ";
 	for (int i = 0; i < indexMessages; i++)
 	{
+		
 		this->messages[i]->print();
+	}
+}
+
+void Camera::print() {
+	for (int j = 0; j < this->buf->i ; j++)
+	{
+		std::cout << "the buffer in camera:\t"<<(this->buf->buffer[j]) << std::endl;
 	}
 }

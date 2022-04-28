@@ -13,12 +13,17 @@ using namespace std;
 class GeneralSimulator
 {
 public:
-	Camera  cameraArr[sumOfCameras];
-	void runGeneralSimulator();
+	Camera cameraArr[sumOfCameras];
+	thread* sendThreadsArr ;
+	thread* runThreadsArr ;
+	thread* stopThreadArr ;
+	/*void runGeneralSimulator();
 	void runSimulator(int i);
-	void stopSimulator(int i);
-	void sendToServer(int i);
-	void spawnThreads(int n);
+	void stopSimulator(int i);*/
+	~GeneralSimulator();
+	GeneralSimulator();
+	void sendToServer(Camera *c);
+	void runThreads();
 };
 #endif // !general
 

@@ -22,7 +22,9 @@ public:
 	void sendToBuffer();
 	void run();
 	void stop();
+	void sendToServer(Camera c);
 	void send();
+	void print();
 };
 
 #endif // !CAMERA
