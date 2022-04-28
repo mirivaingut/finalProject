@@ -18,9 +18,9 @@ public:
 
 	~BaseMessage();
 
-	virtual void parseMessage();
-	virtual void parseBack();
-	virtual void print();
+	virtual void parseMessage()=0;
+	virtual void parseBack()=0;
+	virtual void print()=0;
 	unsigned char* getMessageBuffer();
 };
 
@@ -47,7 +47,7 @@ protected:
 public:
 	DiscoveryMessage(unsigned char* buffer, int id);
 
-	DiscoveryMessage(float dis, float ang, float spe, int id);
+	DiscoveryMessage(int id, float dis, float ang, float spe);
 
 	virtual void parseMessage();
 

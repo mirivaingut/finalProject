@@ -1,6 +1,5 @@
 #include "Simulator.h"
 
-
 using namespace std;
 
 Simulator::~Simulator() {

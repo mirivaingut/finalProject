@@ -5,9 +5,9 @@
 #define SIMULATOR
 
 class Simulator {
-	BaseMessage** buffer;
-	int i = 1;
 public:
+	BaseMessage** buffer=(BaseMessage**)malloc(1);
+	int i = 1;
 	~Simulator();
 
 	void createStatusMessage();
@@ -15,6 +15,7 @@ public:
 	void createDetectionMessage(float dis, float ang, float spe);
 
 	unsigned char* generateAndSendMessage(int index);
+
 };
 
 #endif // !SIMULATOR

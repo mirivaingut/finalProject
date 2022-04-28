@@ -5,14 +5,13 @@
 #define BUFFER
 
 class Buffer {
-	char** buffer;
-	int i = 1;
 
 public:
+	char** buffer/*=(char**)malloc(sizeof(char*))*/;
+	int i = 1;
+	Buffer();
 	void addToBuffer(char* message);
-
 	char** getBuffer();
-
 	void cleanBuffer();
 };
 

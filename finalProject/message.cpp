@@ -3,14 +3,14 @@
 using namespace std;
 
 BaseMessage::BaseMessage(unsigned char* buffer, int id) {
-	printf("BaseMessage(unsigned char* buffer, int id)\n");
+	//printf("BaseMessage(unsigned char* buffer, int id)\n");
 	this->messageBuffer = buffer;
 	this->messageId = id;
 	messageType = static_cast<int>(messageBuffer[1]);
 }
 
 BaseMessage::BaseMessage(int type, int id) {
-	printf("BaseMessage(int type, int id)\n");
+	//cout << "BaseMessage:" << type << " ,,, " << id << "\n";
 	this->messageBuffer = 0;
 	this->messageId = id;
 	messageType = type;
@@ -22,6 +22,12 @@ BaseMessage::~BaseMessage() {
 
 void BaseMessage::parseMessage()
 {
+
+}
+
+void BaseMessage::parseBack()
+{
+
 }
 
 unsigned char* BaseMessage::getMessageBuffer() {
@@ -29,12 +35,12 @@ unsigned char* BaseMessage::getMessageBuffer() {
 }
 
 StatusMessage::StatusMessage(unsigned char* buffer, int id) :BaseMessage(buffer, id) {
-	printf("StatusMessage(unsigned char* buffer, int id)\n");
+	//cout << "StatusMessage" << buffer << "  " << id << "\n";
 	status = 0;
 }
 
 StatusMessage::StatusMessage(int id) : BaseMessage(1, id) {
-	printf("StatusMessage(int id)\n");
+	//printf("StatusMessage(int id)\n");
 	status = 0;
 }
 
@@ -49,19 +55,19 @@ void StatusMessage::parseBack() {
 }
 
 void StatusMessage::print() {
-	cout << "\tstatus:  " << status << endl;
+	//cout << "\tstatus:  " << status << endl;
 }
 
 DiscoveryMessage::DiscoveryMessage(unsigned char* buffer, int id) :BaseMessage(buffer, id) {
-	printf("DiscoveryMessage(unsigned char* buffer, int id)\n");
+	//printf("DiscoveryMessage(unsigned char* buffer, int id)\n");
 	distance = 0;
 	angle = 0;
 	speed = 0;
 }
 
-DiscoveryMessage::DiscoveryMessage(float dis, float ang, float spe, int id) :BaseMessage(1, id) {
-	printf("DiscoveryMessage(float distance, float angle, float speed, int id)\n");
-	distance = dis;
+DiscoveryMessage::DiscoveryMessage(int id, float dis, float ang,float spe ) :BaseMessage(1, id) {
+	//printf("DiscoveryMessage(float distance, float angle, float speed, int id)\n");
+	this->distance = dis;
 	angle = ang;
 	speed = spe;
 }
