@@ -7,11 +7,10 @@
 
 class BaseMessage
 {
-protected:
+public:
 	unsigned char* messageBuffer;
 	int messageId;
 	int messageType;
-public:
 	BaseMessage(unsigned char* buffer, int id);
 
 	BaseMessage(int type, int id);

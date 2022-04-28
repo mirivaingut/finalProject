@@ -1,4 +1,4 @@
-//#include "GeneralSimulator.h"
+#include "GeneralSimulator.h"
 //
 //void GeneralSimulator::runSimulator(int i) {
 //	cameraArr[i].run();
@@ -48,35 +48,63 @@
 
 const int sumCamera = 2;
 
-Camera arrCamera[sumCamera];
+//Camera arrCamera[sumCamera];
 using namespace std;
 
-void runSimulator(int i) {
-	arrCamera[i].run();
+void runSimulator(Camera c) {
+	c.run();
 }
-void stopSimulator(int i) {
-	arrCamera[i].stop();
+void stopSimulator(Camera c) {
+	c.stop();
 
 }
+
+void sendToServer(Camera c) {
+	while (true) {
+		c.send();
+		for (int j = 0; j < ms; j++)
+		{
+			std::this_thread::sleep_for(1s);
+		}
+	}
+}
+
 /**
  * Spawns n threads
  */
-void spawnThreads(int n)
+void GeneralSimulator::spawnThreads(int n)
 {
-	std::vector<thread> threads(n);
+	int sumOfCameras = n;
+	thread* sendThreadsArr = new thread[sumOfCameras];
+	thread* runThreadsArr = new thread[sumOfCameras];
+	thread* stopThreadArr = new thread[sumOfCameras];
+	/*vector<thread> sendThreadsArr(sumOfCameras);
+	vector<thread> runThreadsArr(sumOfCameras);
+	vector<thread> stopThreadArr(sumOfCameras);*/
+	/*std::vector<thread> threads(n);
+	std::vector<thread> threads2(n);*/
 	// spawn n threads:
 	for (int i = 0; i < n; i++) {
-		threads[i] = thread(runSimulator, i + 1);
-		//threads[i] = thread(stopSimulator, i + 1);
+
+		sendThreadsArr[i] = thread(&Camera::send, &cameraArr[i]);
+		runThreadsArr[i] = thread(&Camera::run, &cameraArr[i]);
 	}
 
-	for (auto& th : threads) {
-		th.join();
+	for (int j = 0; j < sumOfCameras; j++)
+	{
+		getchar();
+		stopThreadArr[j] = thread(&Camera::stop, &cameraArr[j]);
+	}
+
+	for (int i = 0; i < sumOfCameras; i++) {
+		sendThreadsArr[i].join();
+		runThreadsArr[i].join();
+		stopThreadArr[i].join();
 	}
 }
 
 int main()
 {
-	spawnThreads(2);
-	getchar();
+	GeneralSimulator g;
+	g.spawnThreads(2);
 }

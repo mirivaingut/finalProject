@@ -66,21 +66,25 @@ void Camera::sendToBuffer() {
 	for (int j = 0; j < indexMessages; j++) {
 		messages[j]->parseBack();
 		buf->addToBuffer(reinterpret_cast<char*>(messages[j]->getMessageBuffer()));
+		std::cout << "messageId: " << (messages[j]->messageId) << "  messageBuffer: " << (messages[j]->messageBuffer) << "\n";
 	}
 	free(messages);
 	messages = NULL;
+	indexMessages = 0;
 }
 
 void Camera::run() {
-	while (isActive) {
+	while (this->isActive) {
 		generate();
 		if (isActive) {
+			messages[0];
 			sendToBuffer();
 		}
 	}
 }
 
 void Camera::stop() {
+	std::cout <<"cameraId: "<<this->id<< "  isActive = false\n";
 	isActive = false;
 }
 
