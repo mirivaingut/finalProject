@@ -33,6 +33,16 @@ Camera::Camera() {
 //	}
 //}
 
+Camera::~Camera() {
+	for (int i = 0; i < this->indexMessages; i++)
+	{
+		free(messages[i]);
+	}
+	messages = NULL;
+	//free(buf);
+}
+
+
 void Camera::generate() {
 	int count = getProb(1, 6);
 	//std::cout << "generate camera id= " << id <<", count "<<count<< '\n';

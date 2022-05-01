@@ -104,20 +104,3 @@ void GeneralSimulator::runThreads()
 	
 }
 
-int main()
-{
-	GeneralSimulator* g=new GeneralSimulator();
-	g->runThreads();
-	for (int i = 0; i < sumOfCameras; i++) {
-		//g->sendThreadsArr[i].join();
-		g->runThreadsArr[i].join();
-		g->stopThreadArr[i].join();
-	}
-
-	for (int i = 0; i < sumOfCameras; i++)
-	{
-		g->cameraArr[i].print();
-		//cout << "the buffer:::::::::::  " << (g->cameraArr[i].buf->buffer)<<endl;
-	}
-	return 1;
-}

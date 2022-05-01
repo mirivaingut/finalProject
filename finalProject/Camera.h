@@ -12,12 +12,13 @@ class Camera {
 public:
 	char id;
 	BaseMessage** messages/*=(BaseMessage**)malloc(sizeof(BaseMessage*))*/;
-	/*Simulator* messages;*/
 	Buffer* buf;
 	bool isActive;
 	int indexMessages;
+	/*Simulator* messages;*/
 
 	Camera();
+	~Camera();
 	void generate();
 	void sendToBuffer();
 	void run();
