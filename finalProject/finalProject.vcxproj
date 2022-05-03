@@ -142,20 +142,16 @@
     <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GeneralSimulator.cpp" />
-    <ClCompile Include="Global.cpp" />
     <ClCompile Include="message.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="random.cpp" />
-    <ClCompile Include="Simulator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="GeneralSimulator.h" />
-    <ClInclude Include="Global.h" />
     <ClInclude Include="message.h" />
     <ClInclude Include="random.h" />
-    <ClInclude Include="Simulator.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="conf.txt" />

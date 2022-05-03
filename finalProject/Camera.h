@@ -3,16 +3,10 @@
 #ifndef CAMERA
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 #define CAMERA
-#include "Simulator.h"
 #include "Buffer.h"
 #include "random.h"
 #include "message.h"
 
-//#include "pch.h"
-//#include "afxwin.h"
-
-//#include "stdafx.h"
-//#include <unistd.h>
 #pragma comment (lib, "Ws2_32.lib")
 #include <iostream>
 #include <string.h>
@@ -25,12 +19,11 @@ static int idCameras=0;
 class Camera {
 public:
 	char id;
-	BaseMessage** messages/*=(BaseMessage**)malloc(sizeof(BaseMessage*))*/;
+	BaseMessage** messages;
 	Buffer* buf;
 	SOCKET connection;
 	bool isActive;
 	int indexMessages;
-	/*Simulator* messages;*/
 
 	Camera();
 	~Camera();

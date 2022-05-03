@@ -3,25 +3,30 @@
 #include <iostream>
 #include <thread>
 #include <vector>
-#include "Global.h"
 #ifndef generalSIMULATOR
 #define generalSIMULATOR
 
 using namespace std::literals::chrono_literals;
+#include <iostream>
+#include <fstream>
+#include <string>
+
 using namespace std;
-//int sumOfCameras;
 class GeneralSimulator
 {
 public:
-	//
-	int sumC = getSumOfCameras();
-	Camera* cameraArr = new Camera[sumOfCameras];
+
+	Camera* cameraArr;
 	thread* sendThreadsArr;
 	thread* runThreadsArr;
 	thread* stopThreadArr;
-	/*void runGeneralSimulator();
-	void runSimulator(int i);
-	void stopSimulator(int i);*/
+
+	int sumOfCameras;
+	int ms;
+
+	void config();
+	int getSumOfCameras();
+	int getMs();
 	~GeneralSimulator();
 	GeneralSimulator();
 	void sendToServer(Camera* c);

@@ -3,14 +3,12 @@
 using namespace std;
 
 BaseMessage::BaseMessage(unsigned char* buffer, int id) {
-	//printf("BaseMessage(unsigned char* buffer, int id)\n");
 	this->messageBuffer = buffer;
 	this->messageId = id;
 	messageType = static_cast<int>(messageBuffer[1]);
 }
 
 BaseMessage::BaseMessage(int type, int id) {
-	//cout << "BaseMessage:" << type << " ,,, " << id << "\n";
 	this->messageBuffer = 0;
 	this->messageId = id;
 	messageType = type;
@@ -20,27 +18,19 @@ BaseMessage::~BaseMessage() {
 	delete[]messageBuffer;
 }
 
-void BaseMessage::parseMessage()
-{
+void BaseMessage::parseMessage() { }
 
-}
-
-void BaseMessage::parseBack()
-{
-
-}
+void BaseMessage::parseBack() { }
 
 unsigned char* BaseMessage::getMessageBuffer() {
 	return messageBuffer;
 }
 
 StatusMessage::StatusMessage(unsigned char* buffer, int id) :BaseMessage(buffer, id) {
-	//cout << "StatusMessage" << buffer << "  " << id << "\n";
 	status = 0;
 }
 
-StatusMessage::StatusMessage(int id,short stat) : BaseMessage(1, id) {
-	//printf("StatusMessage(int id)\n");
+StatusMessage::StatusMessage(int id, short stat) : BaseMessage(1, id) {
 	status = stat;
 }
 
@@ -55,18 +45,16 @@ void StatusMessage::parseBack() {
 }
 
 void StatusMessage::print() {
-	//cout << "\tstatus:  " << status << endl;
+	cout << "status:  " << status << endl;
 }
 
 DiscoveryMessage::DiscoveryMessage(unsigned char* buffer, int id) :BaseMessage(buffer, id) {
-	//printf("DiscoveryMessage(unsigned char* buffer, int id)\n");
 	distance = 0;
 	angle = 0;
 	speed = 0;
 }
 
-DiscoveryMessage::DiscoveryMessage(int id, float dis, float ang,float spe ) :BaseMessage(2, id) {
-	//printf("DiscoveryMessage(float distance, float angle, float speed, int id)\n");
+DiscoveryMessage::DiscoveryMessage(int id, float dis, float ang, float spe) :BaseMessage(2, id) {
 	this->distance = dis;
 	angle = ang;
 	speed = spe;

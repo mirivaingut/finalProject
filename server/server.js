@@ -8,7 +8,6 @@ const server = new Net.createServer();
 function parseBuffer(buffer) {
     let message = {}
     message.type = buffer[0];
-    console.log("message.type ", message.type);
     let tmp = buffer.slice(2)
     if (message.type == 1) {
         message.status = Buffer.from(tmp).readInt8(0)
@@ -17,7 +16,9 @@ function parseBuffer(buffer) {
         message.angle = Buffer.from(tmp).readFloatLE(4);
         message.speed = Buffer.from(tmp).readFloatLE(8);
     }
+    console.log("The message the server received:\n")
     console.log(message);
+    console.log("--------------------------------------------------------------------------------");
 }
 
 server.listen(port, function () {
@@ -25,10 +26,9 @@ server.listen(port, function () {
 });
 
 server.on('connection', function (socket) {
-    console.log('A new connection has been established.');
     socket.on('data', function (buffer) {
-        // for (let index = 0; index < buffer.length; index++) {
-        console.log(`Data received from client: ${buffer.toString()}`);
+        console.log("--------------------------------------------------------------------------------");
+        console.log(`Server received from client: ${buffer.toString()}`);
         parseBuffer(buffer)
     });
 

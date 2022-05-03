@@ -11,8 +11,9 @@ class Buffer {
 
 public:
 	std::mutex m;
-	char** buffer/*=(char**)malloc(sizeof(char*))*/;
+	char** buffer;
 	int i = 1;
+
 	Buffer();
 	void addToBuffer(char* message);
 	char** getBuffer();

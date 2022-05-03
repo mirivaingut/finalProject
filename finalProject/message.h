@@ -11,10 +11,9 @@ public:
 	unsigned char* messageBuffer;
 	int messageId;
 	int messageType;
+
 	BaseMessage(unsigned char* buffer, int id);
-
 	BaseMessage(int type, int id);
-
 	~BaseMessage();
 
 	virtual void parseMessage()=0;
@@ -28,11 +27,9 @@ protected:
 	short status;
 public:
 	StatusMessage(unsigned char* buffer, int id) ;
-
 	StatusMessage(int id, short stat);
 
 	virtual void parseMessage();
-
 	virtual void parseBack();
 	virtual void print();
 };
@@ -45,13 +42,10 @@ protected:
 
 public:
 	DiscoveryMessage(unsigned char* buffer, int id);
-
 	DiscoveryMessage(int id, float dis, float ang, float spe);
 
 	virtual void parseMessage();
-
 	virtual void parseBack();
-
 	virtual void print();
 };
 
