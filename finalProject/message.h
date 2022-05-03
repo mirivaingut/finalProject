@@ -29,7 +29,7 @@ protected:
 public:
 	StatusMessage(unsigned char* buffer, int id) ;
 
-	StatusMessage(int id);
+	StatusMessage(int id, short stat);
 
 	virtual void parseMessage();
 

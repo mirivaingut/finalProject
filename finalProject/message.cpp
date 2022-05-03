@@ -39,9 +39,9 @@ StatusMessage::StatusMessage(unsigned char* buffer, int id) :BaseMessage(buffer,
 	status = 0;
 }
 
-StatusMessage::StatusMessage(int id) : BaseMessage(1, id) {
+StatusMessage::StatusMessage(int id,short stat) : BaseMessage(1, id) {
 	//printf("StatusMessage(int id)\n");
-	status = 0;
+	status = stat;
 }
 
 void StatusMessage::parseMessage() {
@@ -65,7 +65,7 @@ DiscoveryMessage::DiscoveryMessage(unsigned char* buffer, int id) :BaseMessage(b
 	speed = 0;
 }
 
-DiscoveryMessage::DiscoveryMessage(int id, float dis, float ang,float spe ) :BaseMessage(1, id) {
+DiscoveryMessage::DiscoveryMessage(int id, float dis, float ang,float spe ) :BaseMessage(2, id) {
 	//printf("DiscoveryMessage(float distance, float angle, float speed, int id)\n");
 	this->distance = dis;
 	angle = ang;

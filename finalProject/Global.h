@@ -1,4 +1,16 @@
 #pragma once
+#ifndef glo
+#define global1
 
-const int sumOfCameras = 3;
-const int ms = 2;
+ int sumOfCameras;
+ int ms;
+void config();
+int getSumOfCameras();
+int getMs();
+void setSumOfCameras(int s);
+void setMs(int m);
+
+#endif // !glo
+
+
+

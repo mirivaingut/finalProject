@@ -19,5 +19,6 @@ public:
 	void cleanBuffer();
 };
 
-#endif // !BUFFER
+#endif // !
+
 

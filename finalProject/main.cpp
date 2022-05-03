@@ -1,20 +1,46 @@
-//#include "Buffer.h"
-//#include "Camera.h"
-//#include "message.h"
-//#include "GeneralSimulator.h"
-//#include "Simulator.h"
-//#include "Global.h"
-//#include <iostream>
+#include "GeneralSimulator.h"
+#include <iostream>
+#include <fstream>
+#include <string>
 
-//int main() {
-//	/*GeneralSimulator* gs = new GeneralSimulator();
-//	gs->runGeneralSimulator();*/
-//	//Simulator* s = new Simulator();
-//	/*s->createStatusMessage();
-//	s->createDetectionMessage(100.2,23.4,456.9);
-//	s->createDetectionMessage(100.2, 23.4, 456.9);
-//	s->generateAndSendMessage(0);
-//	s->generateAndSendMessage(1);
-//	s->generateAndSendMessage(2);*/
-//	return 1;
+using namespace std;
+//void config() {
+//	int arr[2];
+//	int index = 0;
+//	fstream newfile;
+//
+//	newfile.open("conf.txt", ios::in);
+//	if (newfile.is_open()) {
+//		string tp;
+//		while (getline(newfile, tp)) {
+//			int f = tp.find(':');
+//			int l = tp.find('.');
+//			arr[index++] = stoi(tp.substr(f + 1, l - (f + 1)));
+//			cout << arr[index - 1] << "\n";
+//		}
+//		newfile.close();
+//	}
+//	sumC =new int(arr[0]);
+//	ms = new int(arr[1]);
 //}
+int main()
+{
+int sumC = getSumOfCameras();
+//	config();
+	//cout << "sum::::::::" << sumC << " , " << ms;
+	GeneralSimulator* g = new GeneralSimulator();
+	g->runThreads();
+	for (int i = 0; i < sumC; i++) {
+		//g->sendThreadsArr[i].join();
+		g->runThreadsArr[i].join();
+		g->stopThreadArr[i].join();
+	}
+	for (int i = 0; i <sumC ; i++)
+	{
+		cout << "print " << "camera arr " << (i + 1) << ":\n";
+	}
+	return 1;
+}
+
+
+

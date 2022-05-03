@@ -25,8 +25,11 @@ char** Buffer::getBuffer() {
 
 void Buffer::cleanBuffer() {
 	m.lock();
-	free(buffer);
-	buffer = 0;
-	i = 0;
+	/*for (int j = 0; j < i-1; j++)
+	{
+		delete[] buffer[j];
+	}*/
+	buffer = (char**)malloc(sizeof(char*));
+	i = 1;
 	m.unlock();
 }

@@ -1,59 +1,5 @@
 #include "GeneralSimulator.h"
 
-//const int sumCamera = 2;
-//
-//void GeneralSimulator::runSimulator(int i) {
-//	cameraArr[i].run();
-//}
-//
-//void GeneralSimulator::stopSimulator(int i) {
-//	cameraArr[i].stop();
-//}
-//
-//void GeneralSimulator::sendToServer(int i) {
-//	while (true) {
-//		cameraArr[i].send();
-//		for (int j = 0; j < ms; j++)
-//		{
-//			std::this_thread::sleep_for(1s);
-//		}
-//	}
-//}
-//
-//void GeneralSimulator::runGeneralSimulator() {
-//	vector<thread> sendThreadsArr(sumOfCameras);
-//	vector<thread> runThreadsArr(sumOfCameras);
-//	vector<thread> stopThreadArr(sumOfCameras);
-//	for (int i = 0; i < sumOfCameras; i++)
-//	{
-//		cout << "מצלמה מספר: " << i << "\nלעצירה הקש על תו כלשהוא." << endl;
-//		sendThreadsArr[i] = thread(&GeneralSimulator::sendToServer, i);
-//		runThreadsArr[i] = thread(&GeneralSimulator::runSimulator, i);
-//		/*std::thread	sendth(&GeneralSimulator::sendToServer, i);
-//		std::thread	runth(&GeneralSimulator::runSimulator, i);*/
-//	}
-//
-//	for (int j = 0; j < sumOfCameras; j++)
-//	{
-//		getchar();
-//		stopThreadArr[j] = thread(&GeneralSimulator::stopSimulator, j);
-//		//std::thread	stopth(&GeneralSimulator::stopSimulator, j);
-//	}
-//
-//}
-
-//void runSimulator(Camera c) {
-//	c.run();
-//}
-//void stopSimulator(Camera c) {
-//	c.stop();
-//
-//}
-//
-//GeneralSimulator::~GeneralSimulator() {
-//	delete []cameraArr;
-//}
-
 GeneralSimulator::~GeneralSimulator() {
 	delete[]stopThreadArr;
 	delete[]runThreadsArr;
@@ -61,63 +7,51 @@ GeneralSimulator::~GeneralSimulator() {
 }
 
 GeneralSimulator::GeneralSimulator() {
-	sendThreadsArr = new thread[sumOfCameras];
-	runThreadsArr = new thread[sumOfCameras];
-	stopThreadArr = new thread[sumOfCameras];
+	sendThreadsArr = new thread[sumC];
+	runThreadsArr = new thread[sumC];
+	stopThreadArr = new thread[sumC];
 }
 
 void GeneralSimulator::sendToServer(Camera* c) {
 	while (true) {
 		while (c->isActive)
 		{
-			c->send();
-			for (int j = 0; j < ms; j++)
+			for (int k = 0; k < c->buf->i; k++)
 			{
+				c->sendServer(c->buf->buffer[k]);
 				std::this_thread::sleep_for(1s);
 			}
+
+			//for (int j = 0; j < ms; j++)
+			//{
+			//	
+			//}
 		}
 	}
 }
 
 void GeneralSimulator::runThreads()
 {
-	/*thread* sendThreadsArr = new thread[sumOfCameras];
-	thread* runThreadsArr = new thread[sumOfCameras];
-	thread* stopThreadArr = new thread[sumOfCameras];*/
+	/*thread* sendThreadsArr = new thread[sumC];
+	thread* runThreadsArr = new thread[sumC];
+	thread* stopThreadArr = new thread[sumC];*/
 
-	/*vector<thread> sendThreadsArr(sumOfCameras);
-	vector<thread> runThreadsArr(sumOfCameras);
-	vector<thread> stopThreadArr(sumOfCameras);*/
+	/*vector<thread> sendThreadsArr(sumC);
+	vector<thread> runThreadsArr(sumC);
+	vector<thread> stopThreadArr(sumC);*/
 	/*std::vector<thread> threads(n);
 	std::vector<thread> threads2(n);*/
 
-	for (int i = 0; i < sumOfCameras; i++) {
-		sendThreadsArr[i] = thread(&GeneralSimulator::sendToServer, this, &cameraArr[i]);
+	for (int i = 0; i < sumC; i++) {
 		runThreadsArr[i] = thread(&Camera::run, &cameraArr[i]);
+		sendThreadsArr[i] = thread(&GeneralSimulator::sendToServer, this, &cameraArr[i]);
 	}
 
-	for (int j = 0; j < sumOfCameras; j++) {
+	for (int j = 0; j < sumC; j++) {
 		getchar();
 		stopThreadArr[j] = thread(&Camera::stop, &cameraArr[j]);
 	}
 
-	
+
 }
 
-int main()
-{
-	GeneralSimulator* g=new GeneralSimulator();
-	g->runThreads();
-	for (int i = 0; i < sumOfCameras; i++) {
-		//g->sendThreadsArr[i].join();
-		g->runThreadsArr[i].join();
-		g->stopThreadArr[i].join();
-	}
-
-	for (int i = 0; i < sumOfCameras; i++)
-	{
-		g->cameraArr[i].print();
-		//cout << "the buffer:::::::::::  " << (g->cameraArr[i].buf->buffer)<<endl;
-	}
-	return 1;
-}
